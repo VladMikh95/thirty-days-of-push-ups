@@ -13,6 +13,7 @@ object RemoteConfigUtils {
 
     private const val FONT_SIZE = "font_size"
     private const val FONT_COLOR = "font_color"
+    private const val URL = "url"
 
     private val defaults = mapOf(
         "font_size" to 18,
@@ -51,5 +52,7 @@ object RemoteConfigUtils {
     fun getFontSize() : Double = remoteConfig.getDouble(FONT_SIZE)
 
     fun getFontColor(): String = remoteConfig.getString(FONT_COLOR)
+
+    fun getUrl(): String = remoteConfig.getString(URL)
 
 }

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/buttonFragment">
+    android:id="@+id/nav_graph">
 
     <fragment
         android:id="@+id/buttonFragment"
         android:name="ml.vladmikh.projects.thirty_days_of_push_ups.fragments.ButtonFragment"
         android:label="fragment_button"
         tools:layout="@layout/fragment_button" />
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="ml.vladmikh.projects.thirty_days_of_push_ups.fragments.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/workoutFragment"
+        android:name="ml.vladmikh.projects.thirty_days_of_push_ups.fragments.WorkoutFragment"
+        android:label="fragment_workout"
+        tools:layout="@layout/fragment_workout" />
 </navigation>
