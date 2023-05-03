@@ -6,12 +6,16 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import ml.vladmikh.projects.thirty_days_of_push_ups.databinding.ActivityMainBinding
 import ml.vladmikh.projects.thirty_days_of_push_ups.utils.AppPreferences
 import ml.vladmikh.projects.thirty_days_of_push_ups.utils.RemoteConfigUtils
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var graph : NavGraph
+    private lateinit var navHostFragment : NavHostFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -20,20 +24,22 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        RemoteConfigUtils.init()
+        AppPreferences.init(this)
+
+        navHostFragment = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
+        val inflater = navHostFragment.navController.navInflater
+        graph = inflater.inflate(R.navigation.nav_graph)
+
     }
 
     override fun onStart() {
         super.onStart()
-        val navHostFragment = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
-        val inflater = navHostFragment.navController.navInflater
-        val graph = inflater.inflate(R.navigation.nav_graph)
 
         //Получение данных из remoteConfig firebase
-        RemoteConfigUtils.init()
         val urlRemoteConfig = RemoteConfigUtils.getUrl()
 
         //Проверка сохранены ли данные в SharedPreferences
-        AppPreferences.init(this)
         if (AppPreferences.url == AppPreferences.ABSENT) {
             //Установка  начальный пункт назначения по условию
             if (urlRemoteConfig.isEmpty()){
@@ -41,12 +47,12 @@ class MainActivity : AppCompatActivity() {
             } else {
                 //Сохранение переменной в SharedPreferences
                 AppPreferences.url = urlRemoteConfig
-                graph.setStartDestination(R.id.buttonFragment)
+                graph.setStartDestination(R.id.webViewFragment)
             }
         } else {
             //условие выбора начального пункта назначения в зависимости подключен интернет или нет
             if (checkForInternet(this)) {
-                graph.setStartDestination(R.id.buttonFragment)
+                graph.setStartDestination(R.id.webViewFragment)
             } else {
                 graph.setStartDestination(R.id.infoFragment)
             }
@@ -84,7 +90,9 @@ class MainActivity : AppCompatActivity() {
                 connectivityManager.activeNetworkInfo ?: return false
             @Suppress("DEPRECATION")
             return networkInfo.isConnected
+
         }
     }
+
 
 }
