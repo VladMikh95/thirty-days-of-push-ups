@@ -14,7 +14,11 @@
         android:id="@+id/calendarFragment"
         android:name="ml.vladmikh.projects.thirty_days_of_push_ups.fragments.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_workoutFragment"
+            app:destination="@id/workoutFragment" />
+    </fragment>
     <fragment
         android:id="@+id/workoutFragment"
         android:name="ml.vladmikh.projects.thirty_days_of_push_ups.fragments.WorkoutFragment"
