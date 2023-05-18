@@ -6,6 +6,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import ml.vladmikh.projects.thirty_days_of_push_ups.databinding.ActivityMainBinding
@@ -42,18 +43,23 @@ class MainActivity : AppCompatActivity() {
         //Проверка сохранены ли данные в SharedPreferences
         if (AppPreferences.url == AppPreferences.ABSENT) {
             //Установка  начальный пункт назначения по условию
-            if (urlRemoteConfig.isEmpty()){
+            if (urlRemoteConfig == ""){
+                Log.i("abc", urlRemoteConfig)
+                Log.i("abc", "calendar")
                 graph.setStartDestination(R.id.calendarFragment)
             } else {
                 //Сохранение переменной в SharedPreferences
                 AppPreferences.url = urlRemoteConfig
+                Log.i("abc", "web1")
                 graph.setStartDestination(R.id.webViewFragment)
             }
         } else {
             //условие выбора начального пункта назначения в зависимости подключен интернет или нет
             if (checkForInternet(this)) {
+                Log.i("abc", "web2")
                 graph.setStartDestination(R.id.webViewFragment)
             } else {
+                Log.i("abc", "info")
                 graph.setStartDestination(R.id.infoFragment)
             }
         }

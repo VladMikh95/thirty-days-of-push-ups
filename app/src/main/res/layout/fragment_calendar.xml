@@ -17,25 +17,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_marginTop="32dp"
-        android:layout_width="wrap_content"
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewNumbeOfConsecutiveDays">
-    </CalendarView>
+        app:layout_constraintTop_toBottomOf="@id/textViewNumbeOfConsecutiveDays"
+        />
 
     <Button
         android:id="@+id/buttonStartTraining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Начать тренировку"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/text_view_start_training"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calendarView"/>
+        app:layout_constraintTop_toBottomOf="@id/calendar"/>
 
 
 
